@@ -12,20 +12,21 @@ spring:
         smtp:
           auth: true
           starttls.enable: true
-  datasource:
-    url: jdbc:postgresql://localhost:5432/upiiz_platform
-    username: upiiz
-    password: upiizpass
+  ddatasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
       ddl-auto: validate
     properties:
-      hibernate:
-        format_sql: true
-    open-in-view: false
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+
   flyway:
     enabled: true
-    locations: classpath:db/migration
+    baseline-on-migrate: true
 
 app:
   security:
@@ -44,3 +45,4 @@ logging:
   level:
     org.springframework.security: INFO
     org.hibernate.SQL: INFO
+
